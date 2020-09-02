@@ -1,7 +1,10 @@
 ENIGMA-installer, or the "ENstaller" automates the installation of ENIGMA on 64-bit Windows, utilizing the recommended methods of the ENIGMA Wiki.
 
-This is beta quality software and is currently unfinished.
-Version: Beta 0.5 (PowerShell-Based)
+This is beta quality software and will be updated soon.
+All that can be guaranteed is that it will for sure install ENIGMA on most Windows 10 computers.
+If you have any issues, make sure to submit them into the GitHub Issues system to inform me about them, and they will be fixed.
+
+Beta 0.5 (PowerShell-Based)
 
 == How to use ==
 Download ENstaller, and run "ENstaller.bat".
