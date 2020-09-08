@@ -19,14 +19,14 @@ function curpos([int]$x, [int] $y) {
 Clear-Host
 
 Write-Host "ENIGMA Setup will now perform the following actions:`n" -ForegroundColor Yellow
-Write-Host " ☐  Download MSYS2" -ForegroundColor DarkGray
-Write-Host " ☐  Extract MSYS2" -ForegroundColor DarkGray
-Write-Host " ☐  Install MSYS2" -ForegroundColor DarkGray
-Write-Host " ☐  Install ENIGMA's required packages" -ForegroundColor DarkGray
-Write-Host " ☐  Download ENIGMA's source code" -ForegroundColor DarkGray
-Write-Host " ☐  Compile ENIGMA" -ForegroundColor DarkGray
-Write-Host " ☐  Download and configure OpenJDK 8 and LateralGM" -ForegroundColor DarkGray
-Write-Host " ☐  Create shortcuts" -ForegroundColor DarkGray
+Write-Host " - Download MSYS2" -ForegroundColor DarkGray
+Write-Host " - Extract MSYS2" -ForegroundColor DarkGray
+Write-Host " - Install MSYS2" -ForegroundColor DarkGray
+Write-Host " - Install ENIGMA's required packages" -ForegroundColor DarkGray
+Write-Host " - Download ENIGMA's source code" -ForegroundColor DarkGray
+Write-Host " - Compile ENIGMA" -ForegroundColor DarkGray
+Write-Host " - Configure OpenJDK 8 and download LateralGM" -ForegroundColor DarkGray
+Write-Host " - Create shortcuts" -ForegroundColor DarkGray
 
 curpos 0 2
 Write-Host " → Download MSYS2 (~75MB)" -ForegroundColor Cyan
@@ -34,7 +34,7 @@ Write-Host " → Download MSYS2 (~75MB)" -ForegroundColor Cyan
 Invoke-WebRequest $MSYS_DIST -OutFile msys2.tar.xz
 
 curpos 0 2
-Write-Host " ☑  Download MSYS2        " -ForegroundColor DarkGreen
+Write-Host " X Download MSYS2        " -ForegroundColor DarkGreen
 
 curpos 0 3
 Write-Host " → Extract MSYS2" -ForegroundColor Cyan
@@ -52,7 +52,7 @@ Move-Item "${MSYS2DIR}\msys64\*" "${MSYS2DIR}\"
 Remove-Item "${MSYS2DIR}\msys64"
 
 curpos 0 3
-Write-Host " ☑  Extract MSYS2" -ForegroundColor DarkGreen
+Write-Host " X Extract MSYS2" -ForegroundColor DarkGreen
 
 curpos 0 4
 Write-Host " → Install MSYS2" -ForegroundColor Cyan
@@ -66,7 +66,7 @@ Start-Process -Wait $MSYS2 "-lc `"yes \`"
 \`" | pacman -Su`""
 
 curpos 0 4
-Write-Host " ☑  Install MSYS2" -ForegroundColor DarkGreen
+Write-Host " X Install MSYS2" -ForegroundColor DarkGreen
 
 curpos 0 5
 Write-Host " → Install ENIGMA's required packages" -ForegroundColor Cyan
@@ -75,7 +75,7 @@ Start-Process -Wait $MSYS2 "-lc `"yes \`"
 \`" | pacman -Sy git make mingw-w64-x86_64-gcc mingw-w64-x86_64-boost mingw-w64-x86_64-protobuf mingw-w64-x86_64-libpng mingw-w64-x86_64-rapidjson mingw-w64-x86_64-pugixml mingw-w64-x86_64-yaml-cpp mingw-w64-x86_64-openal mingw-w64-x86_64-dumb mingw-w64-x86_64-libvorbis mingw-w64-x86_64-libogg mingw-w64-x86_64-flac mingw-w64-x86_64-mpg123 mingw-w64-x86_64-libsndfile mingw-w64-x86_64-zlib mingw-w64-x86_64-libffi mingw-w64-x86_64-box2d mingw-w64-x86_64-glew mingw-w64-x86_64-glm mingw-w64-x86_64-alure mingw-w64-x86_64-grpc mingw-w64-x86_64-SDL2 mingw-w64-x86_64-pkg-config mingw-w64-x86_64-libgme mingw-w64-x86_64-sfml mingw-w64-x86_64-bullet mingw-w64-x86_64-gtk2 mingw-w64-x86_64-fluidsynth mingw-w64-x86_64-portaudio`""
 
 curpos 0 5
-Write-Host " ☑  Install ENIGMA's required packages" -ForegroundColor DarkGreen
+Write-Host " X Install ENIGMA's required packages" -ForegroundColor DarkGreen
 
 curpos 0 6
 Write-Host " → Download ENIGMA's source code" -ForegroundColor Cyan
@@ -83,7 +83,7 @@ Write-Host " → Download ENIGMA's source code" -ForegroundColor Cyan
 Start-Process -Wait $MSYS2 "-lc `"git clone https://github.com/enigma-dev/enigma-dev.git`""
 
 curpos 0 6
-Write-Host " ☑  Download ENIGMA's source code" -ForegroundColor DarkGreen
+Write-Host " X Download ENIGMA's source code" -ForegroundColor DarkGreen
 
 curpos 0 7 
 Write-Host " → Compile ENIGMA" -ForegroundColor Cyan
@@ -91,18 +91,17 @@ Write-Host " → Compile ENIGMA" -ForegroundColor Cyan
 &"${MSYS2DIR}\msys2_shell.cmd" -no-start -mingw64 -c "cd enigma-dev; make"
 
 curpos 0 7
-Write-Host " ☑  Compile ENIGMA" -ForegroundColor DarkGreen
+Write-Host " X Compile ENIGMA" -ForegroundColor DarkGreen
 
 curpos 0 8
-Write-Host " → Download and configure OpenJDK 8 and LateralGM" -ForegroundColor Cyan
+Write-Host " → Configure OpenJDK 8 and download LateralGM" -ForegroundColor Cyan
 
-Invoke-WebRequest $OJDK_DIST -OutFile openjdk.zip
-.\resources\7za.exe x -o"${MSYS2DIR}\openjdk" openjdk.zip
+.\resources\7za.exe x -o"${MSYS2DIR}\openjdk" .\resources\openjdk.zip
 Remove-Item openjdk.zip
 Start-Process -Wait $MSYS2 "-lc `"cd enigma-dev; ./install.sh`""
 
 curpos 0 8
-Write-Host " ☑  Download and configure OpenJDK 8 and LateralGM" -ForegroundColor DarkGreen
+Write-Host " X Download and configure OpenJDK 8 and LateralGM" -ForegroundColor DarkGreen
 
 curpos 0 9
 Write-Host " → Create shortcuts" -ForegroundColor Cyan
@@ -130,7 +129,7 @@ $Shortcut.TargetPath = $TargetFile
 $Shortcut.Save()
 
 curpos 0 9
-Write-Host " ☑  Create shortcuts" -ForegroundColor DarkGreen
+Write-Host " X Create shortcuts" -ForegroundColor DarkGreen
 
 Clear-Host
 Write-Host "There are now two shortcuts on your desktop for ENIGMA."
